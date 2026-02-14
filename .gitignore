@@ -1,0 +1,18 @@
+# ambiente virtual
+.venv/
+
+# vscode
+.vscode/
+
+# cache
+__pycache__/
+*.pyc
+
+# notebooks
+.ipynb_checkpoints
+
+# dados brutos
+data/raw
+
+# sistema
+.DS_Store
