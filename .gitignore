@@ -14,5 +14,9 @@ __pycache__/
 # dados brutos
 data/raw
 
+# logs
+logs/*
+*.log
+
 # sistema
 .DS_Store
