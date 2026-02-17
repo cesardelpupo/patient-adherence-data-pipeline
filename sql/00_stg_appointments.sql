@@ -1,11 +1,10 @@
--- STAGING: estrutura base carregada pelo Python
-
 -- ================================================================
--- DDL: Data definition language
+-- STAGING: estrutura base
 -- ================================================================
 
 CREATE TABLE IF NOT EXISTS staging_appointments(
     appointment_id      TEXT    PRIMARY KEY,
+    date_id             INTEGER NOT NULL,
     appointment_date    TEXT    NOT NULL,
     appointment_status  TEXT    NOT NULL,
     patient_id          TEXT    NOT NULL,

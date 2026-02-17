@@ -69,8 +69,35 @@ def load_staging(conn: sqlite3.Connection, df: pd.DataFrame, if_exists: str = 'r
     - Limpa a tabela staging
     - Insere os registros do dataframe no SQLite3
     """
-    conn.execute("DELETE FROM staging_appointments")
+    cursor = conn.cursor()
     
+    # 1. Busca colunas da tabela existente
+    cursor.execute(
+        """
+        SELECT name FROM pragma_table_info('staging_appointments')
+        """
+    )
+    existing_cols = [row[0] for row in cursor.fetchall()]
+    
+    # 2. Compara com colunas do DataFrame
+    df_cols = list(df.columns)
+    
+    # 3. Se diferentes ou tabela não existe → recria
+    if not existing_cols: 
+        logger.info('Tabela staging não existe. Criando...')
+        run_sql_file(conn, SQL_PATH / '00_stg_appointments.sql')
+        
+    elif set(df_cols) != set(existing_cols):
+        logger.info(f'Schema da staging mudou. Recriando tabela...')
+        conn.execute('DROP TABLE IF EXISTS staging_appointments')
+        conn.commit()
+        run_sql_file(conn, SQL_PATH / '00_stg_appointments.sql')
+    
+    # 4. Limpa dados antigos
+    conn.execute("DELETE FROM staging_appointments")
+    conn.commit()
+    
+    # 5. Insere dados novos
     df.to_sql(
         name        = 'staging_appointments',
         con         = conn,
@@ -133,7 +160,7 @@ def load(df: pd.DataFrame, db_path: Path = DB_PATH) -> None:
     
     try:
         # 01. Cria estrutura via SQL
-        run_sql_file(conn, SQL_PATH / '00_create_staging.sql')
+        run_sql_file(conn, SQL_PATH / '00_stg_appointments.sql')
         
         # 02. Carga dos dados
         load_staging(conn, df)
