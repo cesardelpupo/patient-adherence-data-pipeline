@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS staging_appointments(
     attended_flag       INTEGER NOT NULL,
     missed_flag         INTEGER NOT NULL,
     is_package          INTEGER NOT NULL,
-    year                INTEGER NOT NULL,
+    year_num            INTEGER NOT NULL,
     month_num           INTEGER NOT NULL,
     month_name          TEXT,
     month_date          TEXT,

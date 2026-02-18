@@ -1,4 +1,4 @@
-appointment_id,appointment_date,appointment_status,patient_id,appointment_price,payment_type,attended_flag,missed_flag,is_package,date_id,year,month_num,month_name,month_date,weekday_num,weekday_name
+appointment_id,appointment_date,appointment_status,patient_id,appointment_price,payment_type,attended_flag,missed_flag,is_package,date_id,year_num,month_num,month_name,month_date,weekday_num,weekday_name
 APT_00009,2022-01-07,Attended,P001,50.0,PerSession,1,0,0,20220107,2022,1,January,2022-01,5,Friday
 APT_00022,2022-01-14,Attended,P001,50.0,PerSession,1,0,0,20220114,2022,1,January,2022-01,5,Friday
 APT_00035,2022-01-21,Attended,P001,50.0,PerSession,1,0,0,20220121,2022,1,January,2022-01,5,Friday

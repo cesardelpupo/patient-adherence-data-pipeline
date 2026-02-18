@@ -85,7 +85,7 @@ def features(df: pd.DataFrame) -> pd.DataFrame:
     
     # 03. Colunas temporais
     df['date_id']      = df['appointment_date'].dt.strftime('%Y%m%d').astype(int)
-    df['year']         = df['appointment_date'].dt.year
+    df['year_num']     = df['appointment_date'].dt.year
     df['month_num']    = df['appointment_date'].dt.month
     df['month_name']   = df['appointment_date'].dt.strftime('%B')
     df['month_date']   = df['appointment_date'].dt.strftime('%Y-%m')

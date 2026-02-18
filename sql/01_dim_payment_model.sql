@@ -1,17 +1,19 @@
 -- ================================================================
--- dim_payment_model: Dimensão modelo de pagamento
--- Descreve os modelos de cobrança disponíveis.
+-- Arquivo: dim_payment_model.sql
+-- Criado por: [Cesar Del Pupo]
+-- Última Atualização: 2026-02-17
+-- Descrição: Dimensão de modelos de pagamento da clínica.
 -- ================================================================
 
 DROP TABLE IF EXISTS dim_payment_model;
 
-CREATE TABLE IF NOT EXISTS dim_payment_model(
-	payment_model_id	INTEGER		PRIMARY KEY,
-	payment_type		TEXT		NOT NULL UNIQUE,
-	value				REAL		NOT NULL,
-	is_fixed_revenue	INTEGER		NOT NULL DEFAULT 0,
-	implemented_year	INTEGER		NOT NULL,
-	description			TEXT		NOT NULL
+CREATE TABLE dim_payment_model(
+	payment_model_id	INTEGER		PRIMARY KEY,			-- 1 = PerSession | 2 = MonthlyPackage
+	payment_type		TEXT		NULL UNIQUE,		-- Nome do modelo (único): PerSession, MonthlyPackage
+	price				REAL		NOT NULL,				-- Valor financeiro do modelo: R$ 50 (PerSession), R$ 200 (MonthlyPackage)
+	is_fixed_revenue	INTEGER		NOT NULL DEFAULT 0,		-- 0 = receita variável | 1 = receita fixa
+	implemented_year	INTEGER		NOT NULL,				-- Ano que o modelo entrou em vigor
+	description			TEXT		NOT NULL				-- Descrição do modelo
 );
 
 -- ================================================================
@@ -19,17 +21,9 @@ CREATE TABLE IF NOT EXISTS dim_payment_model(
 -- ================================================================
 
 INSERT INTO dim_payment_model (
-	payment_model_id, payment_type, value,
-	is_fixed_revenue, implemented_year, description
+	payment_model_id, payment_type, price, is_fixed_revenue,
+	implemented_year, description
 )
 VALUES 
-	(1, 'PerSession', 50.0, 0, 2022, 
-	'Cobrança por sessão realizada. Receita variável conforme presença.');
-
-INSERT INTO dim_payment_model (
-	payment_model_id, payment_type, value,
-	is_fixed_revenue, implemented_year, description
-)
-VALUES 
-	(2, 'MonthlyPackage', 200.0, 1, 2023,
-	'Pacote mensal fixo. Receita garantida independente de faltas.');
+	(1, 'PerSession', 50.0, 0, 2022, 'Cobrança por sessão realizada. Receita variável conforme presença.'),
+	(2, 'MonthlyPackage', 200.0, 1, 2023, 'Pacote mensal fixo. Receita garantida independente de faltas.');
