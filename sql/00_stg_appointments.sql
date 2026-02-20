@@ -1,5 +1,8 @@
 -- ================================================================
--- STAGING: estrutura base
+-- Arquivo: stg_appointments.sql
+-- Criado por: [Cesar Del Pupo]
+-- Última Atualização: 2026-02-18
+-- Descrição: Tabela staging (estrutura base)
 -- ================================================================
 
 CREATE TABLE IF NOT EXISTS staging_appointments(

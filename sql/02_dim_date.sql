@@ -106,4 +106,4 @@ FROM date_parts;
 -- ================================================================
 
 CREATE INDEX IF NOT EXISTS idx_date_year_month ON dim_date(year_num, month_num);
-CREATE INDEX IF NOT EXISTS idx_date_business   ON dim_date(is_business_day)
+CREATE INDEX IF NOT EXISTS idx_date_business   ON dim_date(is_business_day);
