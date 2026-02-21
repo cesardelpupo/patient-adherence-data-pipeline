@@ -1,5 +1,7 @@
 # ambiente virtual
 .venv/
+venv/
+env/
 
 # vscode
 .vscode/
@@ -7,15 +9,21 @@
 # cache
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.pytest_cache
 
 # notebooks
 .ipynb_checkpoints
 
-# dados brutos
+# data folders
 data/raw
-
-# dados intermediários
 data/processed
+
+# SQLite databases
+data/*.db
+*.sqlite
+*.sqlite3
 
 # logs
 logs/*
@@ -23,3 +31,4 @@ logs/*
 
 # sistema
 .DS_Store
+Thumbs.db
