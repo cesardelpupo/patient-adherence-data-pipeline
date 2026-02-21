@@ -124,9 +124,6 @@ def run():
         logger.info("[2/4] TRANSFORM")
         staging = transform(df_raw)
         
-        # EXPORT CSV
-        staging.to_csv('data/appointments_analytics.csv', index=False)
-        
         # LOAD (staging apenas)
         logger.info("[3/4] LOAD -> staging_appointments")
         load(staging)
