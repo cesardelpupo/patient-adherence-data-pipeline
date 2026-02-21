@@ -84,15 +84,11 @@ def features(df: pd.DataFrame) -> pd.DataFrame:
     df['is_package'] = (df['payment_type'] == 'MonthlyPackage').astype(int)
     
     # 03. Colunas temporais
-    df['date_id']      = df['appointment_date'].dt.strftime('%Y%m%d').astype(int)
-    df['year_num']     = df['appointment_date'].dt.year
-    df['month_num']    = df['appointment_date'].dt.month
-    df['month_name']   = df['appointment_date'].dt.strftime('%B')
-    df['month_date']   = df['appointment_date'].dt.strftime('%Y-%m')
-    df['weekday_num']  = df['appointment_date'].dt.weekday + 1        # (1= Segunda, 7=Domingo)
-    df['weekday_name'] = df['appointment_date'].dt.strftime('%A')     # ('Monday', 'Sunday')
     
-    # 03. Data como string para SQLite
+    # date_id (inteiro para performance JOIN)
+    df['date_id']      = df['appointment_date'].dt.strftime('%Y%m%d').astype(int)
+        
+    # Data como string formato ISO
     # SQLite não tem tipo 'date' nativo
     df['appointment_date'] = df['appointment_date'].dt.strftime('%Y-%m-%d')
     
