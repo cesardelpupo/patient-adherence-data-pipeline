@@ -8,13 +8,13 @@
 DROP TABLE IF EXISTS dim_patient;
 
 CREATE TABLE dim_patient(
-	patient_key				INTEGER PRIMARY KEY AUTOINCREMENT,		
+	patient_key				INTEGER PRIMARY KEY AUTOINCREMENT, 	-- SK para estabilidade nos JOIN e BI performance
 	patient_id				TEXT NOT NULL UNIQUE,
-	first_appointment		TEXT NOT NULL,
-	last_appointment		TEXT NOT NULL,
-	active_years			TEXT,
-	current_payment_model	TEXT,
-	patient_status			TEXT NOT NULL
+	first_appointment		TEXT NOT NULL,						-- Data do primeiro registro de atendimento do período analisado
+	last_appointment		TEXT NOT NULL,						-- Data do atendimento mais recente do período analisado
+	active_years			TEXT,								-- Anos distintos em atendimento no período analisado
+	current_payment_model	TEXT,								-- Mais recente modelo de pagamento baseado no último atendimento
+	patient_status			TEXT NOT NULL						-- Classificação temporal: Novo, retido, perdido e fatore_externos (P004)
 );
 
 INSERT INTO dim_patient(
@@ -29,10 +29,11 @@ WITH patient_base AS(
 		MAX(appointment_date) AS last_appointment,
 		
 		-- quais anos cada paciente esteve ativo
-		GROUP_CONCAT(DISTINCT year_num) AS active_years,
-		MAX(CASE WHEN year_num = 2022 THEN 1 ELSE 0 END) AS in_2022,
-		MAX(CASE WHEN year_num = 2023 THEN 1 ELSE 0 END) AS in_2023
-	FROM staging_appointments
+		GROUP_CONCAT(DISTINCT dd.year_num) AS active_years,
+		MAX(CASE WHEN dd.year_num = 2022 THEN 1 ELSE 0 END) AS in_2022,
+		MAX(CASE WHEN dd.year_num = 2023 THEN 1 ELSE 0 END) AS in_2023
+	FROM staging_appointments AS stg
+	JOIN dim_date AS dd ON stg.date_id = dd.date_id
 	GROUP BY patient_id
 ),
 patient_model AS(       -- seleciona o tipo de pagamento atual de cada paciente.
@@ -56,7 +57,7 @@ SELECT
 		WHEN pb.in_2022 = 1 AND pb.in_2023 = 0 THEN 'Churned'
 		WHEN pb.in_2022 = 0 AND pb.in_2023 = 1 THEN 'New'
 		ELSE 'Unknown'
-	END AS patient_type
+	END AS patient_status
 FROM patient_base AS pb 
 JOIN patient_model AS pm ON pb.patient_id = pm.patient_id
 WHERE pm.rn = 1;
