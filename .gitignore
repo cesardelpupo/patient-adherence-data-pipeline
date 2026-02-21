@@ -14,6 +14,9 @@ __pycache__/
 # dados brutos
 data/raw
 
+# dados intermediários
+data/processed
+
 # logs
 logs/*
 *.log
