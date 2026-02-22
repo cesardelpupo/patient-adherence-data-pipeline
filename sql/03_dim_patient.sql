@@ -1,7 +1,7 @@
 -- ================================================================
 -- Arquivo: dim_patient.sql
 -- Criado por: [Cesar Del Pupo]
--- Última Atualização: 2026-02-19
+-- Última Atualização: 2026-02-22
 -- Descrição: Perfil de cada paciente.
 -- ================================================================
 
@@ -88,5 +88,4 @@ WHERE pm.rn = 1;
 -- INDEXES: Índices para performance no SQL
 -- ================================================================
 
-CREATE INDEX IF NOT EXISTS idx_patient_id       ON dim_patient(patient_id);
 CREATE INDEX IF NOT EXISTS idx_patient_status   ON dim_patient(patient_status);
