@@ -36,12 +36,15 @@ WITH patient_base AS(
 	JOIN dim_date AS dd ON stg.date_id = dd.date_id
 	GROUP BY patient_id
 ),
-patient_model AS(       -- seleciona o tipo de pagamento atual de cada paciente.
+-- seleciona o tipo de pagamento atual de cada paciente.
+patient_model AS(
 	SELECT
 		patient_id,
 		payment_type,
-		-- numera atendimentos por paciente do mais recente para o mais antigo.
-        -- rn = 1 representa o último atendimento.
+		/*
+		numera atendimentos por paciente do mais recente para o mais antigo.
+        rn = 1 representa o último atendimento.
+		*/
         ROW_NUMBER() OVER (PARTITION BY patient_id ORDER BY appointment_date DESC, appointment_id DESC) AS rn
 	FROM staging_appointments
 )
@@ -51,6 +54,25 @@ SELECT
 	pb.last_appointment,
 	pb.active_years,
 	pm.payment_type AS current_payment_model,
+/*
+Regra de status do paciente:
+
+Retained
+- Pacientes ativos em 2022 em 2023.
+
+Churned
+- Pacientes ativos em 2022 mas inativos a partir de 2023.
+
+New
+- Paciente ativos somente a partir de 2023.
+
+External_Factor
+- Caso classificado manualmente (P004) para teste de sensibilidade analítica
+- Usado para avaliar o comportamento da taxa de abstenção, excluindo casos atípicos.
+
+Unknown
+- Outros cenários não cobertos pelas regras acima definidas.
+*/
 	CASE
 		WHEN pb.patient_id = 'P004' THEN 'External_Factor'
 		WHEN pb.in_2022 = 1 AND pb.in_2023 = 1 THEN 'Retained'
