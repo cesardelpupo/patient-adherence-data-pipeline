@@ -91,7 +91,7 @@ def load_staging(conn: sqlite3.Connection, df: pd.DataFrame, if_exists: str = 'r
         logger.info(f'Schema da staging mudou. Recriando tabela...')
         conn.execute('DROP TABLE IF EXISTS staging_appointments')
         conn.commit()
-        run_sql_file(conn, SQL_PATH / '00_stg_appointments.sql')
+        run_sql_file(conn, SQL_PATH / '00_drop_all.sql')
     
     # 4. Limpa dados antigos
     conn.execute("DELETE FROM staging_appointments")
@@ -160,7 +160,7 @@ def load(df: pd.DataFrame, db_path: Path = DB_PATH) -> None:
     
     try:
         # 01. Cria estrutura via SQL
-        run_sql_file(conn, SQL_PATH / '00_stg_appointments.sql')
+        run_sql_file(conn, SQL_PATH / '00_drop_all.sql')
         
         # 02. Carga dos dados
         load_staging(conn, df)
