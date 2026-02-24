@@ -5,8 +5,6 @@
 -- Descrição: Dimensão de modelos de pagamento da clínica.
 -- ================================================================
 
-DROP TABLE IF EXISTS dim_payment_model;
-
 CREATE TABLE dim_payment_model(
 	payment_model_id	INTEGER		PRIMARY KEY,			-- 1 = PerSession | 2 = MonthlyPackage
 	payment_type		TEXT		NOT NULL UNIQUE,		-- Nome do modelo (único): PerSession, MonthlyPackage

@@ -5,8 +5,6 @@
 -- Descrição: Perfil de cada paciente.
 -- ================================================================
 
-DROP TABLE IF EXISTS dim_patient;
-
 CREATE TABLE dim_patient(
 	patient_key				INTEGER PRIMARY KEY AUTOINCREMENT, 	-- SK para estabilidade nos JOIN e BI performance
 	patient_id				TEXT NOT NULL UNIQUE,

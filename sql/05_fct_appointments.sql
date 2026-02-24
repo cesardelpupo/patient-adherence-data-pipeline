@@ -6,8 +6,6 @@
 -- 1 linha = 1 atendimento
 -- ================================================================
 
-DROP TABLE IF EXISTS fct_appointments;
-
 CREATE TABLE fct_appointments(
 	-- chave primária técnica
     fact_key            INTEGER     PRIMARY KEY AUTOINCREMENT,
