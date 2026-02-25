@@ -10,11 +10,12 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 from extract_data import extract
 from transform_data import transform
 from load_data import load, get_connection, run_sql_file
+from data_quality import run_test
 
 SQL_PATH = Path('sql')
 
 # ================================================================
-# LOGGING
+# LOGGING CONFIG
 # ================================================================
 
 def setup_logging() -> logging.Logger:
@@ -52,7 +53,7 @@ def run_sql_scripts(logger: logging.Logger) -> None:
     """
     Executa scripts SQL adicionais após a carga de staging:
     - Procura arquivos .sql na pasta /sql
-    - Ignora arquivos que começam com '00_' (ex: staging)
+    - Ignora arquivos que começam com '00_' (ex: drop_all.sql)
     - Executa scripts em ordem alfabética
     - Aplica commit ao final.
 
@@ -67,7 +68,6 @@ def run_sql_scripts(logger: logging.Logger) -> None:
         logger.info('Nenhum script SQL adicional encontrando em sql/')
         return
     
-    from load_data import get_connection, run_sql_file
     conn = get_connection()
     
     try:
@@ -117,20 +117,28 @@ def run():
     
     try:
         # EXTRACT
-        logger.info("[1/4] EXTRACT")
+        logger.info("[1/5] EXTRACT")
         df_raw = extract()
         
         # TRANSFORM
-        logger.info("[2/4] TRANSFORM")
+        logger.info("[2/5] TRANSFORM")
         staging = transform(df_raw)
         
         # LOAD (staging apenas)
-        logger.info("[3/4] LOAD -> staging_appointments")
+        logger.info("[3/5] LOAD -> staging_appointments")
         load(staging)
         
-        # SQL SCRIPTS (dims, facts, rules, views)
-        logger.info('[4/4] SQL SCRIPTS')
+        # SQL SCRIPTS (dims, facts, marts)
+        logger.info('[4/5] SQL SCRIPTS')
         run_sql_scripts(logger)
+        
+        # DATA QUALITY TESTS
+        logger.info("[5/5] DATA QUALITY TESTS")
+        conn = get_connection()
+        try:
+            run_test(conn, logger)
+        finally:
+            conn.close()
         
         # RESUMO
         elapsed = (datetime.now() - start).total_seconds()
