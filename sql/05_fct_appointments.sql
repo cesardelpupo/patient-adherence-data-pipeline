@@ -96,6 +96,8 @@ MonthlyPackage
 - A receita é reconhecida uma vez por mês para cada paciente.
 - Aplicada a 1ª sessão cronológica do mês (session_rank = 1)
 - O atendimento não depende de presença, visto que o pacote mensal é cobrado antecipadamente. 
+- feat: Adicionado a multiplicação pelo número de sessões semanais contratadas (sessions_per_week) 
+para refletir o valor total do pacote mensal, considerando a frequência semanal acordada.
 
 Todos os outros casos retornam 0.0, para evitar dupla contagem de receita.
 */
@@ -104,7 +106,7 @@ Todos os outros casos retornam 0.0, para evitar dupla contagem de receita.
 		THEN dpm.price
 		
 		WHEN dpm.payment_type = 'MonthlyPackage' AND rs.session_rank = 1
-		THEN dpm.price
+		THEN dpm.price * dp.sessions_per_week
 		
 		ELSE 0.0
 	END AS revenue_realized,
