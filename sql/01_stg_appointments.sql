@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS staging_appointments(
     patient_id          TEXT    NOT NULL,
     appointment_price   REAL,
     payment_type        TEXT    NOT NULL,
+    sessions_per_week   INTEGER NOT NULL,
     attended_flag       INTEGER NOT NULL,
     missed_flag         INTEGER NOT NULL,
     is_package          INTEGER NOT NULL

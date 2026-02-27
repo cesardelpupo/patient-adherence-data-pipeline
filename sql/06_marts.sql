@@ -29,7 +29,7 @@ SELECT
 	SUM(fa.revenue_realized) 		            AS total_revenue_realized,
 	SUM(fa.revenue_lost) 			            AS total_revenue_lost,
 	SUM(fa.revenue_realized)
-	+ SUM(fa.revenue_lost)				            AS total_revenue_expected,
+	+ SUM(fa.revenue_lost)				        AS total_revenue_expected,
 	
 	-- KPI: Taxa de não comparecimento da sessão agendada (%):
 	ROUND(

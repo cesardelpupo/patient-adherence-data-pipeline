@@ -32,3 +32,6 @@ logs/*
 # sistema
 .DS_Store
 Thumbs.db
+
+ # Arquivo Power BI
+*.pbix

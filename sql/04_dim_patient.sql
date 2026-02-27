@@ -12,12 +12,13 @@ CREATE TABLE dim_patient(
 	last_appointment		TEXT NOT NULL,						-- Data do atendimento mais recente do período analisado
 	active_years			TEXT,								-- Anos distintos em atendimento no período analisado
 	current_payment_model	TEXT,								-- Mais recente modelo de pagamento baseado no último atendimento
+	sessions_per_week  		INTEGER,							-- Quantas sessões por semana o paciente faz.
 	patient_status			TEXT NOT NULL						-- Classificação temporal: Novo, retido, perdido e fatore_externos (P004)
 );
 
 INSERT INTO dim_patient(
 	patient_id, first_appointment, last_appointment,
-	active_years, current_payment_model, patient_status
+	active_years, current_payment_model, sessions_per_week, patient_status
 )
 WITH patient_base AS(
 	SELECT
@@ -39,6 +40,7 @@ patient_model AS(
 	SELECT
 		patient_id,
 		payment_type,
+		sessions_per_week,
 		/*
 		numera atendimentos por paciente do mais recente para o mais antigo.
         rn = 1 representa o último atendimento.
@@ -52,6 +54,7 @@ SELECT
 	pb.last_appointment,
 	pb.active_years,
 	pm.payment_type AS current_payment_model,
+	pm.sessions_per_week,
 /*
 Regra de status do paciente:
 

@@ -1,7 +1,7 @@
 -- ================================================================
 -- Arquivo: fct_appointments.sql
 -- Criado por: [Cesar Del Pupo]
--- Última Atualização: 2026-02-21
+-- Última Atualização: 2026-02-27
 -- Descrição: Tabela fato, com a granularidade por atendimentos
 -- 1 linha = 1 atendimento
 -- ================================================================
@@ -73,6 +73,8 @@ PerSession
 MonthlyPackage
 - Apenas a primeira sessão do paciente no mês recebe o valor total do pacote.
 - As demais sessões do pacote recebem valor 0 para evitar duplicação de receita.
+- feat.: Adicionado a multiplicação pelo número de sessões semanais contratadas (sessions_per_week) 
+para refletir o valor total do pacote mensal, considerando a frequência semanal acordada.
 - Tem como objetivo garantir que o valor do pacote seja contabilizado apenas uma vez por período.
 */
 	CASE 
@@ -80,7 +82,7 @@ MonthlyPackage
 		THEN dpm.price
 		
 		WHEN dpm.payment_type = 'MonthlyPackage' AND rs.session_rank = 1
-		THEN dpm.price
+		THEN dpm.price * dp.sessions_per_week
 		
 		ELSE 0.0
 	END AS session_value,

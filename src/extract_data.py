@@ -19,7 +19,8 @@ EXPECTED_COLUMNS = {
     'appointment_status',
     'patient_id',
     'price',
-    'payment_type'
+    'payment_type',
+    'sessions_per_week'
 }
 
 # Status válidos
