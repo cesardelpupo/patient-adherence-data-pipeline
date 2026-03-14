@@ -11,8 +11,8 @@
 WITH wrong_model AS(
     SELECT COUNT(*) AS qty_wrong
     FROM fct_appointments AS fa
-    JOIN dim_date AS dd ON fa.date_id = dd.date_id
-    JOIN dim_payment_model AS dpm ON fa.payment_model_id = dpm.payment_model_id
+    JOIN dim_date AS dd ON fa.date_key = dd.date_key
+    JOIN dim_payment_model AS dpm ON fa.payment_model_key = dpm.payment_model_key
     WHERE (dd.year_num = 2022 AND dpm.payment_type <> 'PerSession')
        OR (dd.year_num = 2023 AND dpm.payment_type <> 'MonthlyPackage')
 ),

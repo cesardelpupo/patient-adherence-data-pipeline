@@ -16,7 +16,7 @@ WITH expected_years AS(
 present_years AS(
     SELECT DISTINCT dd.year_num
     FROM fct_appointments AS fa
-    JOIN dim_date AS dd ON fa.date_id = dd.date_id
+    JOIN dim_date AS dd ON fa.date_key = dd.date_key
 ),
 missing_years AS(
     SELECT COUNT(*) AS missing_qty

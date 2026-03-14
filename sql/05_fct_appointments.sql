@@ -8,15 +8,15 @@
 
 CREATE TABLE fct_appointments(
 	-- chave primária técnica
-    fact_key            INTEGER     PRIMARY KEY AUTOINCREMENT,
+    appointment_key     INTEGER     PRIMARY KEY AUTOINCREMENT,
     
     -- chave de origem
     appointment_id      TEXT        NOT NULL UNIQUE,
     
     -- chaves estrangeiras
-    date_id             INTEGER     NOT NULL,
+    date_key             INTEGER     NOT NULL,
     patient_key         INTEGER     NOT NULL,
-    payment_model_id    INTEGER     NOT NULL,
+    payment_model_key    INTEGER     NOT NULL,
     
     -- flagas
     attended_flag       INTEGER     NOT NULL CHECK (attended_flag IN (0, 1)),
@@ -27,20 +27,20 @@ CREATE TABLE fct_appointments(
     revenue_realized    REAL        NOT NULL DEFAULT 0.0,
     revenue_lost        REAL        NOT NULL DEFAULT 0.0,
 
-    FOREIGN KEY (date_id)           REFERENCES dim_date(date_id),
+    FOREIGN KEY (date_key)           REFERENCES dim_date(date_key),
     FOREIGN KEY (patient_key)       REFERENCES dim_patient(patient_key),
-    FOREIGN KEY (payment_model_id)  REFERENCES dim_payment_model(payment_model_id)
+    FOREIGN KEY (payment_model_key)  REFERENCES dim_payment_model(payment_model_key)
 );
 
 INSERT INTO fct_appointments(
-    appointment_id, date_id, patient_key, 
-    payment_model_id, attended_flag, missed_flag, 
+    appointment_id, date_key, patient_key, 
+    payment_model_key, attended_flag, missed_flag, 
     session_value, revenue_realized, revenue_lost 
 )
 WITH ranked_sessions AS (
 	SELECT
 		stg.appointment_id,
-		stg.date_id,
+		stg.date_key,
 		stg.patient_id,
 		stg.payment_type,
 		stg.attended_flag,
@@ -52,13 +52,13 @@ WITH ranked_sessions AS (
 			PARTITION BY stg.patient_id, dd.year_num, dd.month_num
 			ORDER BY stg.appointment_date ASC, stg.appointment_id ASC) AS session_rank
 	FROM staging_appointments AS stg
-	JOIN dim_date AS dd ON stg.date_id = dd.date_id		
+	JOIN dim_date AS dd ON stg.date_key = dd.date_key		
 )
 SELECT
 	rs.appointment_id,
-	rs.date_id,
+	rs.date_key,
 	dp.patient_key,
-	dpm.payment_model_id,
+	dpm.payment_model_key,
 	rs.attended_flag,
 	rs.missed_flag,
 /* 
@@ -134,6 +134,6 @@ JOIN dim_payment_model AS dpm  ON rs.payment_type = dpm.payment_type;
 -- INDEXES: Índices para performance no SQL
 -- ================================================================
 
-CREATE INDEX IF NOT EXISTS idx_fact_date                ON fct_appointments(date_id);
+CREATE INDEX IF NOT EXISTS idx_fact_date                ON fct_appointments(date_key);
 CREATE INDEX IF NOT EXISTS idx_fct_patient              ON fct_appointments(patient_key);
-CREATE INDEX IF NOT EXISTS idx_fct_payment_model        ON fct_appointments(payment_model_id);
+CREATE INDEX IF NOT EXISTS idx_fct_payment_model        ON fct_appointments(payment_model_key);

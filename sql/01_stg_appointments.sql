@@ -7,7 +7,7 @@
 
 CREATE TABLE IF NOT EXISTS staging_appointments(
     appointment_id      TEXT    PRIMARY KEY,
-    date_id             INTEGER NOT NULL,
+    date_key            INTEGER NOT NULL,
     appointment_date    TEXT    NOT NULL,
     appointment_status  TEXT    NOT NULL,
     patient_id          TEXT    NOT NULL,
@@ -27,4 +27,4 @@ CREATE INDEX IF NOT EXISTS idx_stg_patient ON staging_appointments(patient_id);
 CREATE INDEX IF NOT EXISTS idx_stg_date    ON staging_appointments(appointment_date);
 CREATE INDEX IF NOT EXISTS idx_stg_status  ON staging_appointments(appointment_status);
 CREATE INDEX IF NOT EXISTS idx_stg_type    ON staging_appointments(payment_type);
-CREATE INDEX IF NOT EXISTS idx_stg_date    ON staging_appointments(date_id);
+CREATE INDEX IF NOT EXISTS idx_stg_date    ON staging_appointments(date_key);

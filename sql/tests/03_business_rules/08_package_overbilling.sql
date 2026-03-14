@@ -17,8 +17,8 @@ WITH monthly_billing AS(
         SUM(fa.revenue_realized) AS total_billing,
         MAX(dpm.price)           AS package_price
     FROM fct_appointments AS fa
-    JOIN dim_payment_model AS dpm ON fa.payment_model_id = dpm.payment_model_id
-    JOIN dim_date AS dd ON fa.date_id = dd.date_id
+    JOIN dim_payment_model AS dpm ON fa.payment_model_key = dpm.payment_model_key
+    JOIN dim_date AS dd ON fa.date_key = dd.date_key
     JOIN dim_patient AS dp ON fa.patient_key = dp.patient_key
     WHERE dpm.payment_type = 'MonthlyPackage'
     GROUP BY fa.patient_key, dd.year_num, dd.month_num

@@ -34,10 +34,10 @@ SELECT
 	-- KPI: Taxa de não comparecimento da sessão agendada (%):
 	ROUND(
 		CAST(SUM(fa.missed_flag) AS REAL) 
-        / NULLIF(COUNT(fa.fact_key),0)*100,2)   AS no_show_rate
+        / NULLIF(COUNT(fa.appointment_key),0)*100,2)   AS no_show_rate
 FROM fct_appointments AS fa
-JOIN dim_date AS dd ON fa.date_id = dd.date_id
-JOIN dim_payment_model AS dpm ON fa.payment_model_id = dpm.payment_model_id 
+JOIN dim_date AS dd ON fa.date_key = dd.date_key
+JOIN dim_payment_model AS dpm ON fa.payment_model_key = dpm.payment_model_key 
 GROUP BY
 	dd.month_num,
 	dd.year_num, 
@@ -64,13 +64,13 @@ SELECT
 	-- KPI: Taxa de faltas (%)
 	ROUND(
 		CAST(SUM(fa.missed_flag) AS REAL) 
-        / NULLIF(COUNT(fa.fact_key),0)*100,2)   AS patient_no_show_rate,
+        / NULLIF(COUNT(fa.appointment_key),0)*100,2)   AS patient_no_show_rate,
 	
 	-- Life time value (LTV) de cada paciente por ano
 	SUM(fa.revenue_realized) 	                AS total_paid_by_patient
 FROM fct_appointments AS fa
-JOIN dim_date AS dd ON fa.date_id = dd.date_id
-JOIN dim_payment_model AS dpm ON fa.payment_model_id = dpm.payment_model_id
+JOIN dim_date AS dd ON fa.date_key = dd.date_key
+JOIN dim_payment_model AS dpm ON fa.payment_model_key = dpm.payment_model_key
 JOIN dim_patient AS dp ON fa.patient_key = dp.patient_key
 GROUP BY
 	dp.patient_id,

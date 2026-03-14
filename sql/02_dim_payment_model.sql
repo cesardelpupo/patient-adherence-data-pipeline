@@ -6,7 +6,7 @@
 -- ================================================================
 
 CREATE TABLE dim_payment_model(
-	payment_model_id	INTEGER		PRIMARY KEY,			-- 1 = PerSession | 2 = MonthlyPackage
+	payment_model_key	INTEGER		PRIMARY KEY,			-- 1 = PerSession | 2 = MonthlyPackage
 	payment_type		TEXT		NOT NULL UNIQUE,		-- Nome do modelo (único): PerSession, MonthlyPackage
 	price				REAL		NOT NULL,				-- Valor financeiro do modelo: R$ 50 (PerSession), R$ 200 (MonthlyPackage)
 	is_fixed_revenue	INTEGER		NOT NULL DEFAULT 0,		-- 0 = receita variável | 1 = receita fixa
@@ -19,7 +19,7 @@ CREATE TABLE dim_payment_model(
 -- ================================================================
 
 INSERT INTO dim_payment_model (
-	payment_model_id, payment_type, price, is_fixed_revenue,
+	payment_model_key, payment_type, price, is_fixed_revenue,
 	implemented_year, description
 )
 VALUES 

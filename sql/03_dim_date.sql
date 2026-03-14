@@ -7,7 +7,7 @@
 -- ================================================================
 
 CREATE TABLE dim_date(
-	date_id				INTEGER		PRIMARY KEY,
+	date_key			INTEGER		PRIMARY KEY,
 	full_date			TEXT		NOT NULL UNIQUE,
 	year_num			INTEGER		NOT NULL,
 	semester_num		INTEGER 	NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE dim_date(
 );
 
 INSERT INTO dim_date(
-	date_id, full_date, year_num, semester_num, quarter_num,
+	date_key, full_date, year_num, semester_num, quarter_num,
 	month_num, month_name, month_date, day_num, day_of_year,
 	week_of_year, weekday_num, weekday_name, is_business_day
 )
@@ -38,7 +38,7 @@ WITH RECURSIVE dates(date) AS(
 date_parts AS(
 	SELECT
 		date,
-		CAST(STRFTIME('%Y%m%d', date)       AS INTEGER) 	AS date_id,
+		CAST(STRFTIME('%Y%m%d', date)       AS INTEGER) 	AS date_key,
 		CAST(STRFTIME('%Y', date)           AS INTEGER) 	AS year_num,
 		CAST(STRFTIME('%m', date)           AS INTEGER)		AS month_num,
 		CAST(STRFTIME('%d', date)           AS INTEGER)		AS day_num,
@@ -51,7 +51,7 @@ date_parts AS(
 	FROM dates
 )
 SELECT
-	date_id,
+	date_key,
 	date AS full_date,
 	year_num,
 	CASE  

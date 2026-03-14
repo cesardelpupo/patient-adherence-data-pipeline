@@ -32,7 +32,7 @@ WITH patient_base AS(
 		MAX(CASE WHEN dd.year_num = 2022 THEN 1 ELSE 0 END) AS in_2022,
 		MAX(CASE WHEN dd.year_num = 2023 THEN 1 ELSE 0 END) AS in_2023
 	FROM staging_appointments AS stg
-	JOIN dim_date AS dd ON stg.date_id = dd.date_id
+	JOIN dim_date AS dd ON stg.date_key = dd.date_key
 	GROUP BY patient_id
 ),
 -- seleciona o tipo de pagamento atual de cada paciente.

@@ -85,8 +85,8 @@ def features(df: pd.DataFrame) -> pd.DataFrame:
     
     # 03. Colunas temporais
     
-    # date_id (inteiro para performance JOIN)
-    df['date_id']      = df['appointment_date'].dt.strftime('%Y%m%d').astype(int)
+    # date_key (inteiro para performance JOIN)
+    df['date_key']      = df['appointment_date'].dt.strftime('%Y%m%d').astype(int)
         
     # Data como string formato ISO
     # SQLite não tem tipo 'date' nativo
