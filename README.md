@@ -5,6 +5,7 @@
   <img src="https://img.shields.io/badge/Python-blue?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/SQL-red?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/SQLite-lightblue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge">
   <img src="https://img.shields.io/badge/ETL-orange?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Data%20Pipeline-grey?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Dimensional%20Modeling-purple?style=for-the-badge"/>
@@ -81,3 +82,12 @@ Camada de validação com 14 testes que garantem integridade referencial e ader�
 
 #### 4. Dataviz e Storytelling (Power BI)
 Construção de um dashboard executivo focado em evidenciar o impacto da transição do modelo de negócio, tanto na saúde financeira da clínica quanto na adesão ao tratamento dos pacientes.
+
+## Tecnologias Utilizadas
+
+|Ferramenta    | Descrição                                                               | 
+|--------------|-------------------------------------------------------------------------|
+| Python       | Pipeline ETL: ingestão, limpeza, transformação e orquestração dos dados |
+| SQL / SQLite | Modelagem dimensional (Star Schema) e consultas analíticas              | 
+| Power BI     | Desenvolvimento de dashboards interativos e análise de KPIs             |
+| Git / Github | Versionamento de código e controle de mudanças                          |
