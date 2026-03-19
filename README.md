@@ -105,3 +105,58 @@ Construção de um dashboard executivo focado em evidenciar o impacto da transi�
 *Para otimizar o consumo e suportar análises específicas, foram desenvolvidas **duas data marts especializadas**:*
 - **mart_patient_behavior:** análise do comportamento e padrão de faltas dos pacientes.
 - **mart_monthly_performance:** análise de faturamento e previsibilidade de receita.
+
+## Principais Insights
+
+A análise foi conduzida por meio de uma abordagem comparativa **antes vs depois** (2022 vs 2023), considerando a transição do modelo de cobrança.
+
+A partir da análise dos dados históricos, foram identificados padrões relevantes no comportamento dos pacientes e no impacto direto do modelo de cobrança sobre a operação:
+
+- A taxa de faltas atingia **25,35%**, indicando baixa adesão ao tratamento e alta ociosidade na agenda  
+- Em média, cada paciente faltava aproximadamente **1 sessão por mês**, impactando diretamente a continuidade terapêutica  
+- A receita apresentava alta volatilidade (**±311,22**), tornando o fluxo de caixa imprevisível  
+- O modelo de pagamento por sessão criava um **incentivo indireto ao absenteísmo**, já que não havia penalização financeira para faltas  
+
+Esses fatores evidenciaram que o problema não era apenas operacional, mas estrutural, estando diretamente ligado ao modelo de cobrança adotado.
+
+## Resultados
+
+A implementação do modelo de mensalidade recorrente gerou melhorias significativas tanto na performance operacional quanto na estabilidade financeira do consultório.
+
+### Indicadores Antes vs Depois
+
+| Indicador                  | Antes (2022) | Depois (2023) | Variação            |
+|----------------------------|--------------|---------------|---------------------|
+| Taxa de Faltas (%)         | 25,35%       | 12,48%        | -12,87 pp (-50,77%) |
+| Receita Total Anual        | R$ 21.350    | R$ 26.400     | +23,65%             |
+| Receita Média Mensal       | R$ 1.779,17  | R$ 2.200,00   | +R$ 420,83          |
+| Receita Média por Paciente | R$ 1.642,31  | R$ 2.030,77   | +23,65%             |
+| Volatilidade da Receita    | ±311,22      | ~0            | Estabilidade        |
+| Pacientes Ativos           | 10           | 10            | Estável             |
+
+### Principais Resultados
+
+#### Impacto Operacional e Terapêutico
+
+- **Redução de 50,77% no absenteísmo**: A frequência média de faltas reduziu de aproximadamente **1 ausência mensal para 1 a cada 2 meses**.
+- **Mudança comportamental:** O padrão de faltas dos pacientes que migraram para o modelo recorrente tornou-se **consistente com o comportamento dos pacientes já inseridos nesse modelo**, indicando estabilidade no novo padrão de assiduidade.
+- **Adesão ao tratamento:** A maior regularidade contribui diretamente para a continuidade e eficácia do tratamento terapêutico.
+
+#### Impacto Financeiro
+
+- **Crescimento de 23,65% na receita total:** Alcançado **sem necessidade de aumentar a base de pacientes**, evidenciando ganho de eficiência operacional.  
+- **Estabilização da receita mensal:** Volatilidade da receita reduzida a zero, eliminando o impacto financeiro das faltas.
+- **Aumento do ticket médio:** O modelo provou ser mais eficiente, elevando a receita média gerada por paciente.   
+
+#### Dinâmica de Pacientes
+
+- **7 pacientes migraram** para o modelo recorrente  
+- **3 novos pacientes** foram adquiridos  
+- **3 pacientes saíram (churn)**, mantendo a base de pacientes estável  
+- **Capacidade de ocupação permaneceu em 100%**, mantendo o fluxo operacional 
+
+## Conclusão
+
+Os resultados confirmam a hipótese inicial: o modelo de cobrança recorrente não apenas melhora a previsibilidade financeira, como também influencia diretamente no comportamento dos pacientes, reduzindo faltas e aumentando a aderência ao tratamento.
+
+O projeto demonstra como uma mudança estrutural, quando orientada por dados, pode gerar impacto simultâneo em eficiência operacional, qualidade do serviço prestado e estabilidade financeira.
