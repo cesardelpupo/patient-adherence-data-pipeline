@@ -91,3 +91,17 @@ Construção de um dashboard executivo focado em evidenciar o impacto da transi�
 | SQL / SQLite | Modelagem dimensional (Star Schema) e consultas analíticas              | 
 | Power BI     | Desenvolvimento de dashboards interativos e análise de KPIs             |
 | Git / Github | Versionamento de código e controle de mudanças                          |
+
+## Arquitetura e Modelagem
+
+### Arquitetura da Solução
+![Diagrama de Arquitetura](assets/data_diagram.png)
+*A solução foi estruturada como um **pipeline de dados end-to-end**, no qual os dados brutos passam por um processo de **ETL em Python**, são modelados em um banco **SQLite** no formato **Star Schema**, validados por **testes de qualidade** e, por fim, consumidos em dashboards no **Power BI**.*
+
+### Modelagem Dimensional (Star Schema)
+![Diagrama Star Schema](assets/star_schema.png)
+*O modelo segue uma estrutura **Star Schema**, com tabelas fato representando os atendimentos (fct_appointments) e dimensões como pacientes (dim_patient), calendário (dim_date) e modelo de pagamento (dim_payment_model), garantindo alta performance e flexibilidade analítica.*  
+  
+*Para otimizar o consumo e suportar análises específicas, foram desenvolvidas **duas data marts especializadas**:*
+- **mart_patient_behavior:** análise do comportamento e padrão de faltas dos pacientes.
+- **mart_monthly_performance:** análise de faturamento e previsibilidade de receita.
