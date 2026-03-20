@@ -202,3 +202,28 @@ A implementação do modelo de mensalidade recorrente gerou melhorias significat
 Os resultados confirmam a hipótese inicial: o modelo de cobrança recorrente não apenas melhora a previsibilidade financeira, como também influencia diretamente no comportamento dos pacientes, reduzindo faltas e aumentando a aderência ao tratamento.
 
 O projeto demonstra como uma mudança estrutural, quando orientada por dados, pode gerar impacto simultâneo em eficiência operacional, qualidade do serviço prestado e estabilidade financeira.
+
+## Dashboard do Projeto
+*Visualização geral do dashboard com os principais indicadores de performance:*
+![Preview do Dashboard](assets/dashboard.png)
+    
+*Acesse a versão interativa:*  
+[![Acessar Dashboard](https://img.shields.io/badge/Acessar%20Dashboard-Power%20BI-yellow?style=for-the-badge&logo=powerbi&logoColor=black)](https://app.powerbi.com/view?r=eyJrIjoiYmZmYjcyMzgtYjg2Yy00YTBjLTk2YWQtNzNhNmMwNWIzM2JiIiwidCI6IjMxYzdjNzA5LWZkOWQtNGIyNS05NTliLWI2ZGJiMGQ4Y2RlNiJ9)
+
+
+## Próximos Passos
+
+Evolução planejada do projeto, priorizada de acordo com impacto e maturidade da solução:
+
+### Evolução da Camada Analítica (Analytics Engineering)
+- Substituir transformações SQL manuais por **dbt**, promovendo versionamento e modularização
+- Evoluir o banco atual (**SQLite**) para uma solução mais robusta e escalável (**PostgreSQL**)
+
+### Expansão Analítica
+- Integrar novas fontes de dados via **API do Google Sheets**, eliminando dependência de inputs manuais
+- Expandir o histórico de dados para múltiplos anos, permitindo análises mais robustas e comparativas
+
+### Evolução da Engenharia de Dados (Data Engineering)
+- Orquestrar o pipeline com **Apache Airflow**, garantindo execução automatizada e monitoramento
+- Containerizar a aplicação com **Docker**, facilitando reprodutibilidade e deploy
+- Migrar o armazenamento e processamento para o **Google BigQuery**, aproveitando a arquitetura **serverless e escalável de nuvem**.
