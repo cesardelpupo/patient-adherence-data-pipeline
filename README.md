@@ -106,6 +106,48 @@ Construção de um dashboard executivo focado em evidenciar o impacto da transi�
 - **mart_patient_behavior:** análise do comportamento e padrão de faltas dos pacientes.
 - **mart_monthly_performance:** análise de faturamento e previsibilidade de receita.
 
+### Estrutura do Repositório
+   
+```
+occupational_therapy_office_analytics/
+│
+├── assets/                           # diagramas e imagens 
+│
+├── config/                           # configurações
+│
+├── data/ 
+│   └── raw/                          # dados brutos
+│
+├── logs/                             # logs de execução 
+│
+├── notebooks/                        # análises exploratórias 
+│
+├── sql/                              # modelagem e testes
+│   ├── staging_appointments.sql
+│   ├── dim_payment_model.sql
+│   ├── dim_date.sql
+│   ├── dim_patient.sql
+│   ├── fct_appointments.sql
+│   ├── marts.sql
+│   └── tests/
+│       ├── 01_flow/
+│       ├── 02_referential/
+│       ├── 03_business_rules/
+│       ├── 04_layer_consistency/
+│       └── 05_temporal/
+│    
+├── src/                              # Pipeline de dados 
+│   ├── extract_data.py
+│   ├── transform_data.py
+│   ├── load_data.py
+│   └── data_quality.py 
+│ 
+├── .gitignore 
+├── pipeline.py                       # Orquestração principal 
+├── README.md 
+└── requirements.txt
+```
+
 ## Principais Insights
 
 A análise foi conduzida por meio de uma abordagem comparativa **antes vs depois** (2022 vs 2023), considerando a transição do modelo de cobrança.
