@@ -161,6 +161,26 @@ A partir da análise dos dados históricos, foram identificados padrões relevan
 
 Esses fatores evidenciaram que o problema não era apenas operacional, mas estrutural, estando diretamente ligado ao modelo de cobrança adotado.
 
+### Absenteísmo como indicador de Churn
+
+Ao aprofundar a análise sob a perspectiva do comportamento individual dos pacientes, foi identificado um padrão claro: pacientes que vieram a abandonar o tratamento apresentavam níveis significativamente mais altos de absenteísmo.
+
+- **Pacientes em churn:** taxa média de faltas de 32,05%
+- **Pacientes ativos:** taxa média de 20%
+
+Esse padrão evidencia que o absenteísmo atua como um indicador comportamental de risco.
+
+**Insight-chave:** Um aumento sustentado na taxa de faltas pode ser interpretado como um sinal precoce de churn, permitindo ações proativas para retenção e melhoria da continuidade terapêutica.
+
+### Impacto do modelo de Receita Recorrente
+
+A transição para o modelo de mensalidade não apenas estabilizou a receita, mas também promoveu uma mudança significativa no comportamento dos pacientes.
+
+- **Novos pacientes (2023):** taxa de faltas de 13,46%
+- **Pacientes migrados:** taxa de 14,57%
+
+Em comparação ao modelo anterior, observa-se uma redução consistente no absenteísmo, indicando maior comprometimento com o tratamento.
+
 ## Resultados
 
 A implementação do modelo de mensalidade recorrente gerou melhorias significativas tanto na performance operacional quanto na estabilidade financeira do consultório.
@@ -201,7 +221,9 @@ A implementação do modelo de mensalidade recorrente gerou melhorias significat
 
 Os resultados confirmam a hipótese inicial: o modelo de cobrança recorrente não apenas melhora a previsibilidade financeira, como também influencia diretamente no comportamento dos pacientes, reduzindo faltas e aumentando a aderência ao tratamento.
 
-O projeto demonstra como uma mudança estrutural, quando orientada por dados, pode gerar impacto simultâneo em eficiência operacional, qualidade do serviço prestado e estabilidade financeira.
+Além disso, a análise revelou que o absenteísmo atua como um importante indicador comportamental de risco, permitindo identificar precocemente pacientes com maior probabilidade de abandono do tratamento.
+
+O projeto demonstra como uma mudança estrutural, quando orientada por dados, pode não apenas otimizar resultados financeiros, mas também apoiar decisões mais assertivas na gestão do cuidado, promovendo maior continuidade terapêutica e eficiência operacional.
 
 ## Dashboard do Projeto
 *Visualização geral do dashboard com os principais indicadores de performance:*
