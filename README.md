@@ -16,6 +16,19 @@
 >Esse projeto foi desenvolvido a partir de dados reais de um consultório de Terapia Ocupacional Pediátrica.  
 >Por questões de segurança e privacidade, todos os dados foram **anonimizados**.
 
+## Destaques do Projeto (TL;DR)
+
+### Principais Insights de Negócio
+- Redução de **50% na taxa de absenteísmo**
+- Aumento de **23% na receita total**, sem expansão da base de pacientes
+- Absenteísmo identificado como **indicador de risco de churn**
+
+### Destaques Técnicos
+- Pipeline de dados end-to-end com **Python, SQL e Power BI**
+- Modelagem dimensional em **Star Schema**
+- Implementação de **14 testes automatizados de qualidade de dados**
+- Execução completa do pipeline em menos de 1 segundo.
+
 ## Problema de Negócio
 
 O consultório de Terapia Ocupacional operava com um modelo de atendimento que vinculava diretamente a receita à presença do paciente, com **cobrança realizada por sessão**. Na prática, esse modelo gerava um incentivo indireto ao **absenteísmo:** como não havia custo ao faltar, parte dos pacientes não mantinha a regularidade necessária.
