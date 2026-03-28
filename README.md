@@ -105,6 +105,14 @@ Construção de um dashboard executivo focado em evidenciar o impacto da transi�
 | Power BI     | Desenvolvimento de dashboards interativos e análise de KPIs             |
 | Git / Github | Versionamento de código e controle de mudanças                          |
 
+## Visão geral do Pipeline
+
+O pipeline de dados tem o seguinte fluxo:
+
+**Dados Brutos → ETL (Python) → SQLite (Star Schema) → Testes de Qualidade de dados → Dashboard Power BI**
+
+Esse fluxo transforma dados operacionais brutos em informações confiáveis, reprodutíveis e prontas para análise, sustentando a geração de insights de negócio apresentadas nesse projeto.
+
 ## Arquitetura e Modelagem
 
 ### Arquitetura da Solução
@@ -159,6 +167,33 @@ occupational_therapy_office_analytics/
 ├── pipeline.py                       # Orquestração principal 
 ├── README.md 
 └── requirements.txt
+```
+
+### Como executar o pipeline
+
+Para executar o pipeline localmente, siga os passos abaixo:
+
+1. Clone o repositório
+```bash
+git clone https://github.com/cesardelpupo/patient-adherence-data-pipeline.git
+cd patient-adherence-data-pipeline
+```
+
+2. **(Opcional)** Crie um ambiente virtual
+```bash
+python -m venv venv
+source venv/bin/activate    # Linux/Mac
+venv\Scripts\activate       # Windows
+```
+
+3. Instale as dependências
+```bash
+pip install -r requirements.txt
+```
+
+4. Execute o pipeline
+```bash
+python pipeline.py
 ```
 
 ## Principais Insights
