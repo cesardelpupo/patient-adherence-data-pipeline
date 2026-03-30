@@ -1,6 +1,6 @@
-# End-to-End Data Pipeline: Da Assiduidade à Previsibilidade Financeira em Clínica de Terapia Ocupacional Pediátrica
+# End-to-End Data Pipeline: Da Assiduidade à Previsibilidade Financeira em Consultório de Terapia Ocupacional Pediátrica
 
-Esse projeto apresenta um pipeline de dados end-to-end desenvolvido para analisar o impacto do absenteísmo em um consultório de terapia ocupacional, transformando dados operacionais em insights que aumentam a previsibilidade financeira e a aderência ao tratamento.  
+Este pipeline foi desenvolvido para estruturar e analisar dados operacionais de um consultório, com o objetivo de mensurar o impacto do absenteísmo na previsibilidade financeira e na continuidade do tratamento.  
 <br>
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Completed-green?style=for-the-badge"/>
