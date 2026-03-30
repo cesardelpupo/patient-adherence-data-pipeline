@@ -1,5 +1,7 @@
-# End-to-End Data Pipeline: Da Assiduidade à Previsibilidade Financeira em Clínica de Terapia Ocupacional Pediátrica  
+# End-to-End Data Pipeline: Da Assiduidade à Previsibilidade Financeira em Clínica de Terapia Ocupacional Pediátrica
 
+Esse projeto apresenta um pipeline de dados end-to-end desenvolvido para analisar o impacto do absenteísmo em um consultório de terapia ocupacional, transformando dados operacionais em insights que aumentam a previsibilidade financeira e a aderência ao tratamento.  
+<br>
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Completed-green?style=for-the-badge"/>
   <img src="https://img.shields.io/badge/Python-blue?style=for-the-badge"/>
@@ -15,6 +17,22 @@
 >[!NOTE] 
 >Esse projeto foi desenvolvido a partir de dados reais de um consultório de Terapia Ocupacional Pediátrica.  
 >Por questões de segurança e privacidade, todos os dados foram **anonimizados**.
+
+## Sumário
+1. [Destaques do Projeto (TL;DR)](#destaques-do-projeto-tldr)  
+2. [Problema de Negócio](#problema-de-negócio)  
+3. [Objetivo do Projeto](#objetivo-do-projeto)  
+4. [Estratégia da Solução](#estratégia-da-solução)  
+5. [Tecnologias Utilizadas](#tecnologias-utilizadas)  
+6. [Visão Geral do Pipeline](#visão-geral-do-pipeline)  
+7. [Arquitetura e Modelagem](#arquitetura-e-modelagem)  
+8. [Como Executar o Pipeline](#como-executar-o-pipeline)  
+9. [Logs de Execução](#logs-de-execução)  
+10. [Principais Insights](#principais-insights)  
+11. [Resultados](#resultados)  
+12. [Dashboard do Projeto](#dashboard-do-projeto)  
+13. [Conclusão](#conclusão)  
+14. [Próximos Passos](#próximos-passos)  
 
 ## Destaques do Projeto (TL;DR)
 
@@ -169,7 +187,7 @@ occupational_therapy_office_analytics/
 └── requirements.txt
 ```
 
-### Como executar o pipeline
+## Como executar o pipeline
 
 Para executar o pipeline localmente, siga os passos abaixo:
 
@@ -195,6 +213,122 @@ pip install -r requirements.txt
 ```bash
 python pipeline.py
 ```
+
+## Logs de execução
+
+O pipeline possui logging estruturado para monitoramento das etapas e validação de qualidade dos dados.
+
+<details>
+<summary>Execução concluída com sucesso ✅</summary>
+
+```
+2026-03-27 16:48:16,368 | INFO     | ==================================================
+2026-03-27 16:48:16,368 | INFO     | APPOINTMENT ANALYTICS PIPELINE
+2026-03-27 16:48:16,368 | INFO     | ==================================================
+2026-03-27 16:48:16,368 | INFO     | [1/5] EXTRACT
+2026-03-27 16:48:16,372 | INFO     | CSV lido: 1157 linhas | 7 colunas.
+2026-03-27 16:48:16,374 | INFO     | Input data validado com sucesso.
+2026-03-27 16:48:16,374 | INFO     | [2/5] TRANSFORM
+2026-03-27 16:48:16,381 | INFO     | Limpeza concluída: 1157 registros.
+2026-03-27 16:48:16,390 | INFO     | Enriquecimento com features concluído: 11
+2026-03-27 16:48:16,390 | INFO     | Transformação concluída: 1157 linhas | 11 colunas
+2026-03-27 16:48:16,390 | INFO     | [3/5] LOAD -> staging_appointments
+2026-03-27 16:48:16,391 | INFO     | Conectado: data\appointments_analytics.db
+2026-03-27 16:48:16,391 | INFO     | Iniciando Full refresh...
+2026-03-27 16:48:16,436 | INFO     | Executado: 00_drop_all.sql
+2026-03-27 16:48:16,456 | INFO     | Staging carregada: 1157 registros.
+2026-03-27 16:48:16,457 | INFO     | Load concluído com sucesso.
+2026-03-27 16:48:16,458 | INFO     | [4/5] SQL SCRIPTS
+2026-03-27 16:48:16,460 | INFO     | Conectado: data\appointments_analytics.db
+2026-03-27 16:48:16,460 | INFO     | Executando: 01_stg_appointments.sql
+2026-03-27 16:48:16,460 | INFO     | Executado: 01_stg_appointments.sql
+2026-03-27 16:48:16,460 | INFO     | Executando: 02_dim_payment_model.sql
+2026-03-27 16:48:16,477 | INFO     | Executado: 02_dim_payment_model.sql
+2026-03-27 16:48:16,478 | INFO     | Executando: 03_dim_date.sql
+2026-03-27 16:48:16,513 | INFO     | Executado: 03_dim_date.sql
+2026-03-27 16:48:16,513 | INFO     | Executando: 04_dim_patient.sql
+2026-03-27 16:48:16,534 | INFO     | Executado: 04_dim_patient.sql
+2026-03-27 16:48:16,534 | INFO     | Executando: 05_fct_appointments.sql
+2026-03-27 16:48:16,576 | INFO     | Executado: 05_fct_appointments.sql
+2026-03-27 16:48:16,577 | INFO     | Executando: 06_marts.sql
+2026-03-27 16:48:16,588 | INFO     | Executado: 06_marts.sql
+2026-03-27 16:48:16,588 | INFO     | 6 script(s) SQL executado(s)
+2026-03-27 16:48:16,589 | INFO     | [5/5] DATA QUALITY TESTS
+2026-03-27 16:48:16,591 | INFO     | Conectado: data\appointments_analytics.db
+2026-03-27 16:48:16,592 | INFO     | Iniciando testes de Data Quality: Executando 14 testes encontrados.
+2026-03-27 16:48:16,592 | INFO     | ============================================================
+2026-03-27 16:48:16,592 | INFO     |  [OK] 01_FLOW      | 01 Flow Volumetry
+2026-03-27 16:48:16,592 | INFO     |  [OK] 02_REFERENTIAL | 02 Null Patient Key
+2026-03-27 16:48:16,593 | INFO     |  [OK] 02_REFERENTIAL | 03 Null Date Id
+2026-03-27 16:48:16,593 | INFO     |  [OK] 02_REFERENTIAL | 04 Null Payment Model Id
+2026-03-27 16:48:16,593 | INFO     |  [OK] 02_REFERENTIAL | 05 Orphan Patient Key
+2026-03-27 16:48:16,594 | INFO     |  [OK] 02_REFERENTIAL | 06 Orphan Date Id
+2026-03-27 16:48:16,594 | INFO     |  [OK] 02_REFERENTIAL | 07 Orphan Payment Model Id
+2026-03-27 16:48:16,595 | INFO     |  [OK] 03_BUSINESS_RULES | 08 Package Overbilling
+2026-03-27 16:48:16,595 | INFO     |  [OK] 03_BUSINESS_RULES | 09 No Negative Revenue
+2026-03-27 16:48:16,597 | INFO     |  [OK] 03_BUSINESS_RULES | 10 Status Flag Consistency
+2026-03-27 16:48:16,598 | INFO     |  [OK] 04_LAYER_CONSISTENCY | 11 Fact Mart Volumetry Consistency
+2026-03-27 16:48:16,600 | INFO     |  [OK] 04_LAYER_CONSISTENCY | 12 Fact Mart Financial Consistency
+2026-03-27 16:48:16,600 | INFO     |  [OK] 05_TEMPORAL  | 13 Year Coverage
+2026-03-27 16:48:16,601 | INFO     |  [OK] 05_TEMPORAL  | 14 Payment Model By Year
+2026-03-27 16:48:16,601 | INFO     | ============================================================
+2026-03-27 16:48:16,601 | INFO     | Data Quality concluído: 100% dos dados estão íntegros.
+2026-03-27 16:48:16,601 | INFO     | ==================================================
+2026-03-27 16:48:16,602 | INFO     | CONCLUÍDO em 0.23s
+2026-03-27 16:48:16,602 | INFO     | ==================================================
+```
+</details>
+
+<details>
+<summary>Execução com erro (Data Quality) ❌</summary>
+
+```
+2026-02-27 11:51:26,233 | INFO     | ==================================================
+2026-02-27 11:51:26,233 | INFO     | APPOINTMENT ANALYTICS PIPELINE
+2026-02-27 11:51:26,234 | INFO     | ==================================================
+2026-02-27 11:51:26,234 | INFO     | [1/5] EXTRACT
+2026-02-27 11:51:26,237 | INFO     | CSV lido: 1188 linhas | 7 colunas.
+2026-02-27 11:51:26,238 | INFO     | Input data validado com sucesso.
+2026-02-27 11:51:26,239 | INFO     | [2/5] TRANSFORM
+2026-02-27 11:51:26,246 | INFO     | Limpeza concluída: 1188 registros.
+2026-02-27 11:51:26,254 | INFO     | Enriquecimento com features concluído: 11
+2026-02-27 11:51:26,255 | INFO     | Transformação concluída: 1188 linhas | 11 colunas
+2026-02-27 11:51:26,255 | INFO     | [3/5] LOAD -> staging_appointments
+2026-02-27 11:51:26,255 | INFO     | Conectado: data\appointments_analytics.db
+2026-02-27 11:51:26,255 | INFO     | Iniciando Full refresh...
+2026-02-27 11:51:26,297 | INFO     | Executado: 00_drop_all.sql
+2026-02-27 11:51:26,316 | INFO     | Staging carregada: 1188 registros.
+2026-02-27 11:51:26,317 | INFO     | Load concluído com sucesso.
+2026-02-27 11:51:26,317 | INFO     | [4/5] SQL SCRIPTS
+2026-02-27 11:51:26,319 | INFO     | Conectado: data\appointments_analytics.db
+2026-02-27 11:51:26,319 | INFO     | Executando: 01_stg_appointments.sql
+2026-02-27 11:51:26,319 | INFO     | Executado: 01_stg_appointments.sql
+2026-02-27 11:51:26,320 | INFO     | Executando: 02_dim_payment_model.sql
+2026-02-27 11:51:26,333 | INFO     | Executado: 02_dim_payment_model.sql
+2026-02-27 11:51:26,333 | INFO     | Executando: 03_dim_date.sql
+2026-02-27 11:51:26,370 | INFO     | Executado: 03_dim_date.sql
+2026-02-27 11:51:26,370 | INFO     | Executando: 04_dim_patient.sql
+2026-02-27 11:51:26,391 | INFO     | Executado: 04_dim_patient.sql
+2026-02-27 11:51:26,391 | INFO     | Executando: 05_fct_appointments.sql
+2026-02-27 11:51:26,436 | INFO     | Executado: 05_fct_appointments.sql
+2026-02-27 11:51:26,436 | INFO     | Executando: 06_marts.sql
+2026-02-27 11:51:26,449 | INFO     | Executado: 06_marts.sql
+2026-02-27 11:51:26,449 | INFO     | 6 script(s) SQL executado(s)
+2026-02-27 11:51:26,449 | INFO     | [5/5] DATA QUALITY TESTS
+2026-02-27 11:51:26,451 | INFO     | Conectado: data\appointments_analytics.db
+2026-02-27 11:51:26,452 | INFO     | Iniciando testes de Data Quality: Executando 14 testes encontrados.
+2026-02-27 11:51:26,452 | INFO     | ============================================================
+2026-02-27 11:51:26,452 | INFO     |  [OK] 01_FLOW      | 01 Flow Volumetry
+2026-02-27 11:51:26,453 | INFO     |  [OK] 02_REFERENTIAL | 02 Null Patient Key
+2026-02-27 11:51:26,453 | INFO     |  [OK] 02_REFERENTIAL | 03 Null Date Id
+2026-02-27 11:51:26,453 | INFO     |  [OK] 02_REFERENTIAL | 04 Null Payment Model Id
+2026-02-27 11:51:26,454 | INFO     |  [OK] 02_REFERENTIAL | 05 Orphan Patient Key
+2026-02-27 11:51:26,454 | INFO     |  [OK] 02_REFERENTIAL | 06 Orphan Date Id
+2026-02-27 11:51:26,455 | INFO     |  [OK] 02_REFERENTIAL | 07 Orphan Payment Model Id
+2026-02-27 11:51:26,455 | CRITICAL | Erro de sintaxe SQL no arquivo '08_package_overbilling.sql': no such column: dp.sessions_per_week
+2026-02-27 11:51:26,455 | ERROR    | Pipeline execution stopped due to data quality failure
+```
+</details>
 
 ## Principais Insights
 
